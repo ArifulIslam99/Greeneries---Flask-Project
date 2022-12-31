@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<style>
+
+</style>
+</head>
+<body>
+    
+    <p class="text-center my-5 fs-1 fw-bold">Create a New Product</p>
+
+
+<form  class="w-25 mx-auto" action="/upload_product" method="POST">
+    <div class="input-group mb-3 ">
+ 
+      <input type="text" class="form-control mb-3" name="product_image" placeholder="Image URL">
+
+      </div>
+      
+      <input type="text" class="form-control mb-3" name="product_name" placeholder="Product Name">
+
+      <input type="number" class="form-control  mb-3" name="product_price" placeholder="Price" min="100" step="50">
+
+      
+      <select class="form-select mb-3" name="product_category" id="inputGroupSelect01">
+        <option selected>outdoor</option>
+        <option value="indoor">indoor</option>
+        <option value="outdoor">outdoor</option>
+        <option value="tools">tools</option>
+      </select>
+
+
+
+      <select class="form-select mb-3" name="product_size" id="inputGroupSelect01">
+        <option selected>small</option>
+        <option value="large">large</option>
+        <option value="small">small</option>
+      </select>
+
+
+
+<!-- 
+      <input class="form-check-input" type="checkbox" name="pot" value="available" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        Available Pot
+      </label>
+
+      <input class="form-check-input" type="checkbox" name="delivery" value="yes" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        Outside Dhaka
+      </label>
+       -->
+      <br> 
+
+      <button type="submit" class="btn btn-success w-100">upload</button>
+</form>
+<br>
+{% if is_post == True %}
+{% if product_post == True %}
+    <h4 class="text-center text-success">Product Uploaded</h4>
+{% else %}
+    <h4 class="text-center text-danger">Please put all the information</h4>
+{% endif %}
+{% endif %}
+</body>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</html>
