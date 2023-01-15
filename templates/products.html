@@ -11,14 +11,15 @@
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;">
+    <!-- Navigation Starts Here -->
+    <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary" style="background-color: #e3f2fd;">
         <div class="container-fluid">
-            <a class="navbar-brand nav_img fs-3 text-secondary fw-bold font-monospace" href="/">Greeneries</a>
+            <a class="navbar-brand nav_img fs-4 text-secondary fw-bold font-monospace" href="/">Greeneries</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+            <div class="collapse navbar-collapse justify-content-lg-end" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
@@ -27,40 +28,54 @@
                         <a class="nav-link" href="/products">Plants</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Blogs</a>
+                        <a class="nav-link" href="/blogs">Blogs</a>
                     </li>
+   
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="/cart">Cart</a>
                     </li>
+                    {% if "logged_in" in session %}
+                    <li class="nav-item">
+                      <a class="nav-link me-1">Hi, {{session["username"].upper()}} </a>
+                  </li>
+                    <li class="nav-item">
+                      <a class="nav-link btn btn-sm btn-danger text-white" href="/logout">Logout</a>
+                  </li>
+                    {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="/login">Login</a>
+                  </li>
+                    {% endif %}
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Cart</a>
-                    </li>
 
                 </ul>
             </div>
         </div>
     </nav>
+    <!-- Navigation End -->
 
 <!-- NAv Ends -->
-    <p class="fs-1 text-primary text-center mt-5 fw-bold">Plants</p>
+    <p class="fs-1 text-primary text-center mt-5 fw-bold">Plants and Tools</p>
 
     <!-- search bar -->
     <div class="container-fluid w-50 mx-auto">
-        <form method="post" action="/products" class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" name="search_btn" aria-label="Search">
-
-          <!-- <select class="form-select w-25 me-2" name="product_category" aria-label="Default select example">
-            <option selected>outdoor</option>
-            <option value="indoor">indoor</option>
-            <option value="outdoor">outdoor</option>
-            
-          </select> -->
-    
+        <form method="post" action="/products" class="d-flex" role="search" name="search_form">
+          <input class="form-control me-2" type="search" placeholder="Search" name="search_btn" aria-label="Search" list="filter">
+          <datalist id="filter">
+            <option value="indoor">
+            <option value="outdoor">
+            <option value="tools">
+            <option value="large">
+            <option value="small">
+          </datalist>
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
-    <!-- search bar ends -->
+
+
+      
+
+          <!-- search bar ends -->
     <div class="row w-75 mx-auto my-3">
         {% for data in showProducts %}
         <div class="col-lg-4 col-md-6 col-sm-12 g-4">
@@ -69,11 +84,16 @@
                 <div class="card-body">
                   <p class="card-text fs-5 text-secondary fw-bold"> {{data["title"]}} </p>
                   <p class="card-text fw-bolder"> Price: {{data["price"]}} BDT </p>
-                  <button class="btn btn-warning w-100 text-center">Watch Details</button>
+                  <a href="/product/details/{{data["_id"]}}">
+                    <button class="btn btn-warning w-100 text-center">Watch Details</button>
+                  </a>
                 </div>
               </div>
         </div>
         {% endfor %}
+        </div>
+   
+
 </body>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
